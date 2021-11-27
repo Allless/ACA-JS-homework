@@ -1,15 +1,40 @@
 let schedule = document.getElementById('schedule');
+let addButton = document.getElementById('submitLine');
+let inputLine = document.getElementById('addLine');
 
-function handleClick({ target }) {
+function handleListItemClick({ target }) {
     for (let listItem of schedule.children) {
-        if (listItem === target) {
+        if (listItem.firstChild === target) {
             target.classList.toggle('checked');
             break;
         }
-        if (!listItem.classList.contains('checked')) {
+        if (!listItem.firstChild.classList.contains('checked')) {
             break;
         }
     }
+}
+
+function createListElement(value) {
+    let newElem = document.createElement('li');
+
+    let elemText = document.createElement('span');
+    elemText.innerText = value;
+    elemText.addEventListener('mouseenter', handleEnter);
+    elemText.addEventListener('mouseleave', handleLeave);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Del';
+    deleteButton.addEventListener('click', handleDelete);
+    deleteButton.classList.add('delButton');
+
+    newElem.appendChild(elemText);
+    newElem.appendChild(deleteButton);
+
+    return newElem;
+}
+
+function handleDelete({ target }) {
+    target.parentElement.remove();
 }
 
 function handleEnter({ target }) {
@@ -20,8 +45,14 @@ function handleLeave({ target }) {
     target.classList.remove('hovered');
 }
 
-schedule.addEventListener('click', handleClick);
-for (let listItem of schedule.children) {
-    listItem.addEventListener('mouseenter', handleEnter);
-    listItem.addEventListener('mouseleave', handleLeave);
+function handleButtonClick() {
+    if (inputLine.value === '') {
+        return;
+    }
+    let newLine = createListElement(inputLine.value);
+    schedule.appendChild(newLine);
 }
+
+addButton.addEventListener('click', handleButtonClick);
+schedule.addEventListener('click', handleListItemClick);
+export * from '/Script.js'
