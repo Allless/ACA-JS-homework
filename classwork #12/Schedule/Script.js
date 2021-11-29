@@ -55,4 +55,3 @@ function handleButtonClick() {
 
 addButton.addEventListener('click', handleButtonClick);
 schedule.addEventListener('click', handleListItemClick);
-export * from '/Script.js'
