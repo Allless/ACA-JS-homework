@@ -1,4 +1,4 @@
-let faqBody = document.getElementById('faqList');
+let faqList = document.getElementById('faqList');
 let data = [
     ['Question #1', 'Answer #1'],
     ['Question #2', 'Answer #2'],
@@ -9,31 +9,44 @@ updateFaqBody();
 
 function updateFaqBody() {
     for ([question, answer] of data) {
-        let row = document.createElement('li');
-        row.classList.add('faqListItem');
-
-        let questionElement = document.createElement('p');
-        questionElement.classList.add('faqQuestion');
-        questionElement.innerText = question;
-
-        let showButton = document.createElement('input');
-        showButton.classList.add('faqShowButton');
-        showButton.type = 'button';
-        showButton.value = 'show';
-        showButton.addEventListener('click', handleClick);
-
-        let answerElement = document.createElement('p');
-        answerElement.innerText = answer;
-        answerElement.classList.add('hidden', 'faqAnswer');
-
-        row.appendChild(questionElement);
-        row.appendChild(showButton);
-        row.appendChild(answerElement);
-        faqBody.appendChild(row);
+        let row = createRow(question, answer);
+        faqList.appendChild(row);
     }
 }
 
-function handleClick({ target }) {
+function createQuestion(question) {
+    let questionElement = document.createElement('p');
+    questionElement.classList.add('faqQuestion');
+    questionElement.innerText = question;
+    return questionElement;
+}
+function createShowButton() {
+    let showButton = document.createElement('input');
+    showButton.classList.add('faqShowButton');
+    showButton.type = 'button';
+    showButton.value = 'show';
+    showButton.addEventListener('click', handleShowClick);
+    return showButton;
+}
+function createAnswer(answer) {
+    let answerElement = document.createElement('p');
+    answerElement.innerText = answer;
+    answerElement.classList.add('hidden', 'faqAnswer');
+    return answerElement;
+}
+function createRow(question, answer) {
+    let row = document.createElement('li');
+    row.classList.add('faqListItem');
+
+    let questionElement = createQuestion(question);
+    let showButton = createShowButton();
+    let answerElement = createAnswer(answer);
+
+    row.append(questionElement, showButton, answerElement);
+    return row;
+}
+
+function handleShowClick({ target }) {
     target.value = target.value == 'show' ? 'hide' : 'show';
     target.nextSibling.classList.toggle('hidden');
 }
