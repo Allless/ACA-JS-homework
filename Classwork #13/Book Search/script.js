@@ -32,7 +32,7 @@ function handleSearch(input, page = 1) {
 
 function showSearchResult(data, input) {
     let pagesCount = Math.ceil(data.numFound / 100);
-    drowFooter(pagesCount, input);
+    drawFooter(pagesCount, input);
 
     searchResult.innerHTML = `Pages Found: ${data.numFound}`;
     for ({
@@ -81,7 +81,7 @@ function addLoadingMessage(text, element) {
     }
 }
 
-function drowFooter(pagesCount, input) {
+function drawFooter(pagesCount, input) {
     footer.innerHTML = '';
     for (let i = 1; i <= pagesCount; i++) {
         let footerLink = document.createElement('div');
