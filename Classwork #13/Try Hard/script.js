@@ -28,7 +28,7 @@ class myPromise {
         setTimeout(this.handleResolve, 0);
     }
     reject(value) {
-        this.status = 'reject';
+        this.status = 'rejected';
         this._data = value;
         setTimeout(this.handleReject, 0);
     }
@@ -38,6 +38,9 @@ class myPromise {
         return next;
     }
     catch(cb) {
+        if (this.status === 'rejected') {
+            cb(this._data);
+        }
         let handler = new myPromise(cb, this);
         this.handlerQueue.push(handler);
 
