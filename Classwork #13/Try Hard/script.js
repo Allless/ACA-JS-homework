@@ -14,8 +14,8 @@ class myPromise {
             this.cb = function (data) {
                 try {
                     this.resolve(callback(data));
-                } catch {
-                    this.reject(callback(data));
+                } catch (e) {
+                    this.reject(e);
                 }
             };
         } else {
@@ -32,15 +32,17 @@ class myPromise {
         this._data = value;
         setTimeout(this.handleReject, 0);
     }
-    then(cb) {
-        let next = new myPromise(cb, this);
+    then(resolved, rejected) {
+        let next = new myPromise(resolved, this);
         this.promiseQueue.push(next);
+
         return next;
     }
     catch(cb) {
         if (this.status === 'rejected') {
-            cb(this._data);
+            return new myPromise((rs, rj) => rs(cb()));
         }
+
         let handler = new myPromise(cb, this);
         this.handlerQueue.push(handler);
 
