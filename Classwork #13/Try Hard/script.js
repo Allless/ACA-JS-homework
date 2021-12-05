@@ -32,9 +32,16 @@ class myPromise {
         this._data = value;
         setTimeout(this.handleReject, 0);
     }
-    then(resolved, rejected) {
+    then(resolved, rejected = null) {
         let next = new myPromise(resolved, this);
         this.promiseQueue.push(next);
+
+        if (typeof rejected !== 'function') {
+            rejected = (data) => {
+                throw new Error(data);
+            };
+        }
+        this.catch(rejected);
 
         return next;
     }
@@ -54,16 +61,11 @@ class myPromise {
         }
     }
     handleReject() {
-        let alone = !Boolean(
-            this.handlerQueue.length + this.promiseQueue.length
-        );
+        let handled = Boolean(this.handlerQueue.length);
         for (let handler of this.handlerQueue) {
             handler.cb(this._data);
         }
-        for (let promise of this.promiseQueue) {
-            promise.reject(this._data);
-        }
-        if (alone) {
+        if (!handled) {
             throw new Error(this._data);
         }
     }
