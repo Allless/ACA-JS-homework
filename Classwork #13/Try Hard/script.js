@@ -19,7 +19,11 @@ class myPromise {
                 }
             };
         } else {
-            callback(this.resolve, this.reject);
+            try {
+                callback(this.resolve, this.reject);
+            } catch (e) {
+                this.reject(e);
+            }
         }
     }
     resolve(value) {
