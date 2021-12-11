@@ -1,0 +1,32 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    width: 60%;
+    margin: auto;
+}
+
+#filmList {
+    list-style-type: none;
+}
+#filmList li {
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 22px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.FilmDescriptionRow {
+    display: flex;
+}
+
+.FilmDescriptionRowLeft {
+    flex: 2;
+}
+
+.FilmDescriptionRowRight {
+    flex: 7;
+}
