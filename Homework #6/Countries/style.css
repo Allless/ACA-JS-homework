@@ -1,0 +1,36 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#content {
+    width: 60%;
+    margin: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.CountryList{
+    list-style: none;
+}
+
+.CountryContainer {
+    margin-top: 20px;
+}
+
+.CountryContainerRow {
+    display: flex;
+    padding: 3px;
+}
+
+.CountryRowLeft {
+    flex: 1;
+}
+
+.CountryRowRight {
+    flex: 3;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+}
