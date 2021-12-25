@@ -1,0 +1,8 @@
+.constant {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid gray;
+    border-radius: 7px;
+    padding: 5px;
+    margin: 5px;
+}

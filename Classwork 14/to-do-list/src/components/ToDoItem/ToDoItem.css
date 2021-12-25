@@ -1,0 +1,7 @@
+.toDoItem {
+    min-height: 30px;
+}
+
+.Completed-todo-item {
+    text-decoration: line-through;
+}
