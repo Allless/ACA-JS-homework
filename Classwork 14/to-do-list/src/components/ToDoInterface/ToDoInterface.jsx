@@ -13,7 +13,7 @@ import style from './ToDoInterface.module.css';
 const ERROR_MESSAGE = `Local storage is unacceptable
 Enable it and refresh the page`;
 
-const localData = getLocalData('todolist') || null;
+const localData = getLocalData('todolist') || [];
 
 export default function ToDoInterface(props) {
     const [initialData, setData] = useState(localData);

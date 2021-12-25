@@ -9,11 +9,18 @@ export default function ToDoInputForm({ addToDo }) {
     };
     const handleClick = () => {
         addToDo({ _id: idGenerator(), text: toDo, status: 'Active' });
+        setToDo('');
+    };
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            handleClick();
+        }
     };
 
     return (
         <div className={style.inputForm}>
             <input
+                onKeyDown={handleKeyDown}
                 className={style.input}
                 type="text"
                 value={toDo}

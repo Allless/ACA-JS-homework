@@ -1,6 +1,9 @@
+import getLocalData from '../../ToDoInterface/helpers/getLocalData';
+
 const idGenerator = (() => {
-    let id = 0;
-    return () => id++;
+    const data = getLocalData('todolist');
+    let lastId = data && data.length ? +data[data.length - 1]._id : -1;
+    return () => ++lastId;
 })();
 
 export default idGenerator;
